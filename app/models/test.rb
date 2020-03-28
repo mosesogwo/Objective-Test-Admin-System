@@ -1,3 +1,5 @@
 class Test < ApplicationRecord
-  belongs_to :creator
+  validates :title, :start_date, :end_date, :pass_score, presence: true
+
+  belongs_to :creator, class_name: 'User'
 end
