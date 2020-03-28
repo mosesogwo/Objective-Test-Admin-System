@@ -9,7 +9,7 @@ RSpec.describe Test, type: :model do
 
   # Associations
   it { should belong_to(:creator) }
-  # it { should have_many(:user_tests) }
-  # it { should have_many(:candidates).through(:user_tests) }
-  # it { should have_many(:questions) }
+  it { should have_many(:user_tests) }
+  it { should have_many(:candidates).through(:user_tests) }
+  it { should have_many(:questions) }
 end

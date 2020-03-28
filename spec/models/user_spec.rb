@@ -8,6 +8,6 @@ RSpec.describe User, type: :model do
 
   # Associations
   it { should have_many(:created_tests) }
-  # it { should have_many(:user_tests) }
-  # it { should have_many(:taken_tests).through(:user_tests) }
+  it { should have_many(:user_tests) }
+  it { should have_many(:taken_tests).through(:user_tests) }
 end
