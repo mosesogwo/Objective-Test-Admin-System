@@ -20,7 +20,7 @@ RSpec.describe 'Authentication', type: :request do
       post "http://localhost:3000/api/v1/authenticate", params: { email: "#{user.email}", password: "#{user.password}n" }
       result = JSON.parse(response.body)["error"]["user_authentication"]
       expect(result).to eq("Invalid Credentials")
-      end
+    end
   end
 
 end
