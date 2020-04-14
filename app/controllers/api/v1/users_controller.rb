@@ -1,6 +1,7 @@
 module Api
   module V1
     class UsersController < ApplicationController
+      before_action :authenticate_request, only: [:update, :destroy]
 
       def create
         user = User.new(user_params)
@@ -11,7 +12,7 @@ module Api
         end
       end
 
-      def edit
+      def update
         user = User.find(params[:id])
         if user && user.update(user_params)
           render json: { status: 'SUCCESS', message: 'Account Successfully Modified', data: user }, status: :ok
