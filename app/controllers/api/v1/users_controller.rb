@@ -12,10 +12,21 @@ module Api
       end
 
       def edit
-        # user = User.find_by(id: )
+        user = User.find(params[:id])
+        if user && user.update(user_params)
+          render json: { status: 'SUCCESS', message: 'Account Successfully Modified', data: user }, status: :ok
+        else
+          render json: { status: 'ERROR', message: 'Something went wrong, account modification failed', data: user.errors }, status: :unprocessable_entity
+        end
       end
 
       def destroy
+        user = User.find(params[:id])
+        if user && user.destroy
+          render json: { status: 'SUCCESS', message: 'Account Successfully Deleted', data: user }, status: :ok
+        else
+          render json: { status: 'ERROR', message: 'Something went wrong, account deletion failed', data: user.errors }, status: :not_found
+        end
       end
 
 
