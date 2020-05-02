@@ -11,12 +11,14 @@ RSpec.describe "Users", type: :request do
         expect(response).to have_http_status(200)
       end
     end
+
     context "with invalid params" do
       it "returns an error(unprocessale_entity) response" do
         post "/api/v1/users", params: invalid_params
         expect(response).to have_http_status(422)
       end
     end
+
   end
 
   describe "PATCH /users/id" do
@@ -45,7 +47,7 @@ RSpec.describe "Users", type: :request do
   describe "DELETE /users/id" do
     context "with user logged in" do
       it "successfully deletes the user" do
-
+        
       end
     end
 
@@ -56,4 +58,5 @@ RSpec.describe "Users", type: :request do
       end
     end
   end
+  
 end

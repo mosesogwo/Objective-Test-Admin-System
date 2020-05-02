@@ -1,7 +1,7 @@
 module Api
   module V1
     class UsersController < ApplicationController
-      before_action :authenticate_request, only: [:update, :destroy]
+      skip_before_action :authenticate_request, only: :create
 
       def create
         user = User.new(user_params)
@@ -26,7 +26,7 @@ module Api
         if user && user.destroy
           render json: { status: 'SUCCESS', message: 'Account Successfully Deleted', data: user }, status: :ok
         else
-          render json: { status: 'ERROR', message: 'Something went wrong, account deletion failed', data: user.errors }, status: :not_found
+          render json: { status: 'ERROR', message: 'Something went wrong, account deletion failed', data: user }, status: :not_found
         end
       end
 
