@@ -1,7 +1,8 @@
 module Api
   module V1
     class QuestionsController < ApplicationController
-      
+      before_action :verify_test_creator
+
       def create
         question = Question.new(q_params)
         if question.save
@@ -33,6 +34,13 @@ module Api
       
       def  q_params
         params.permit(:q_text, :q_options, :q_answer, :test_id)
+      end
+
+      def verify_test_creator
+        user = Test.where(params[test_id]).creator
+        if @current_user != user
+          render json: { error: command.errors }, status: :unauthorized
+        end
       end
       
     end

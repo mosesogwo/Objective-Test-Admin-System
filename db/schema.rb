@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_28_192619) do
+ActiveRecord::Schema.define(version: 2020_05_02_202909) do
 
   create_table "questions", force: :cascade do |t|
     t.text "q_text"
@@ -38,9 +38,9 @@ ActiveRecord::Schema.define(version: 2020_03_28_192619) do
     t.date "start_date"
     t.date "end_date"
     t.float "pass_score"
-    t.integer "creator_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "creator_id"
     t.index ["creator_id"], name: "index_tests_on_creator_id"
   end
 
