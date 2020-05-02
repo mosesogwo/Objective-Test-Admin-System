@@ -6,7 +6,8 @@ RSpec.describe "Questions", type: :request do
   describe "POST /api/v1/tests/:test_id/questions" do
     context "with valid params" do
       it "returns a success response" do
-        post "/api/v1/tests/#{test.id}/questions", params: question1
+        post 
+        post "/api/v1/tests/#{test.id}/questions"
         expect(response).to have_http_status(200)
       end
     end

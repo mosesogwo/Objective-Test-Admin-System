@@ -24,15 +24,15 @@ RSpec.describe "Users", type: :request do
   describe "PATCH /users/id" do
     context "with user logged in" do
       it "successfully edits the user with valid params" do
-        # post '/api/v1/authenticate', params: {email: test_user.email, password: test_user.password }
-        # auth_token = JSON.parse(response.body)["auth_token"]
-        # request.headers['Authorization'] = auth_token
-        # patch "/api/v1/users/#{test_user.id}", params: valid_params
-        # JSON.parse(response)
-        # expect(response).to have_http_status(200)
+        auth_token = login_test_user
+        patch "/api/v1/users/#{test_user.id}", params: valid_params, headers: {Authorization: auth_token}
+        expect(response).to have_http_status(200)
       end
 
       it "fails to edit user with invalid params" do
+        auth_token = login_test_user
+        patch "/api/v1/users/#{test_user.id}", params: invalid_params, headers: {Authorization: auth_token}
+        expect(response).to have_http_status(422)
       end
     end
 
@@ -45,18 +45,26 @@ RSpec.describe "Users", type: :request do
   end
 
   describe "DELETE /users/id" do
-    context "with user logged in" do
-      it "successfully deletes the user" do
-        
-      end
-    end
-
     context "with user logged out" do
       it "returns an authorization error" do
         delete "/api/v1/users/#{test_user.id}"
         expect(response).to have_http_status(401)
       end
     end
+
+    context "with user logged in" do
+      it "successfully deletes the user" do
+        auth_token = login_test_user
+        delete "/api/v1/users/#{test_user.id}", headers: {Authorization: auth_token}
+        expect(response).to have_http_status(200)
+      end
+    end
+
+  end
+
+  def login_test_user
+    post '/api/v1/authenticate', params: {email: test_user.email, password: test_user.password }
+    JSON.parse(response.body)["auth_token"]
   end
   
 end
