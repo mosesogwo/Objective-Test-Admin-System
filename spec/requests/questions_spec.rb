@@ -8,7 +8,7 @@ RSpec.describe "Questions", type: :request do
     context "with valid params" do
       it "returns a success response" do
         auth_token = login_test_user
-        post "/api/v1/tests/#{test.id}/questions", headers: { Authorization: auth_token }, params: question1
+        post "/api/v1/tests/#{test.id}/questions", params: question1
         expect(response).to have_http_status(200)
       end
     end

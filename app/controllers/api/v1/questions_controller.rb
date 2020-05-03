@@ -1,9 +1,10 @@
 module Api
   module V1
     class QuestionsController < ApplicationController
-      before_action :verify_test_creator
+      # before_action :verify_test_creator
 
       def create
+        byebug
         question = Question.new(q_params)
         if question.save
           render json: { status: 'SUCCESS', message: 'Question saved', data: question }, status: :ok
@@ -31,16 +32,10 @@ module Api
       end
 
       private
-      
-      def  q_params
-        params.permit(:q_text, :q_options, :q_answer, :test_id)
-      end
 
-      def verify_test_creator
-        user = Test.where(params[test_id]).creator
-        if @current_user != user
-          render json: { error: command.errors }, status: :unauthorized
-        end
+      def q_params
+        q_keys = params.try(:fetch, :q_options, {}).keys
+        params.permit(:test_id, :q_text, :q_answer, q_options: q_keys)
       end
       
     end
