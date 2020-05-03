@@ -34,8 +34,7 @@ module Api
       private
 
       def q_params
-        q_keys = params.try(:fetch, :q_options, {}).keys
-        params.permit(:test_id, :q_text, :q_answer, q_options: q_keys)
+        params.permit(:test_id, :q_text, :q_answer, q_options: [:A, :B, :C])
       end
       
     end
