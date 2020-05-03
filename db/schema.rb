@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_02_202909) do
+ActiveRecord::Schema.define(version: 2020_05_03_201814) do
 
   create_table "questions", force: :cascade do |t|
     t.text "q_text"
@@ -45,10 +45,10 @@ ActiveRecord::Schema.define(version: 2020_05_02_202909) do
   end
 
   create_table "user_tests", force: :cascade do |t|
-    t.integer "test_id"
-    t.integer "candidate_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "candidate_id"
+    t.integer "test_id"
     t.index ["candidate_id"], name: "index_user_tests_on_candidate_id"
     t.index ["test_id"], name: "index_user_tests_on_test_id"
   end
