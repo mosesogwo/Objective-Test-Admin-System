@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       post 'authenticate', to: 'authentication#authenticate'
       resources :users, only: [:create, :update, :destroy]
-      resources :tests do
+      resources :tests, only: [:index, :create, :update, :destroy] do
         resources :questions
       end
     end

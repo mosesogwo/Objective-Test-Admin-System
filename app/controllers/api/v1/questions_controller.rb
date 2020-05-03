@@ -4,7 +4,6 @@ module Api
       # before_action :verify_test_creator
 
       def create
-        byebug
         question = Question.new(q_params)
         if question.save
           render json: { status: 'SUCCESS', message: 'Question saved', data: question }, status: :ok
