@@ -6,7 +6,8 @@ Rails.application.routes.draw do
       resources :tests, only: [:index, :create, :update, :destroy] do
         resources :questions
       end
-      resources :user_tests, only: [:create]
+      resources :user_tests, only: :create
+      resources :results, only: :create
     end
   end
 end

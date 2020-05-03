@@ -6,4 +6,5 @@ class User < ApplicationRecord
 
   has_many :user_tests, foreign_key: :candidate_id
   has_many :taken_tests, foreign_key: :candidate_id, through: :user_tests, source: :test
+  has_many :results, foreign_key: :candidate_id
 end
